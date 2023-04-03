@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-router-dom": "^6.9.0",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^9.1.2",
+    "styled-components": "^5.3.9"
+  },
+  "name": "chat-app",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "react-scripts start"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5000"
+}
