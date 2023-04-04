@@ -30,16 +30,17 @@ userRouter
     }
   })
   .post("/login", async (req, res, next) => {
+    console.log("Test from login");
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        next(createError(401, "Failed"));
+        next(createError(401, "User not found !!!!!"));
         return;
       }
 
       const doneLogin = await compare(req.body.password, user.password);
       if (!doneLogin) {
-        next(createError(401, "Failed"));
+        next(createError(401, "Failed !!!!"));
         return;
       }
 
