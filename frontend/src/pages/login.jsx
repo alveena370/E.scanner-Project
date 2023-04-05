@@ -65,9 +65,10 @@ const Login = ({ token, setToken, setUser }) => {
           <span>
             <Link to="/register">Register</Link>
           </span>
+
+          <hr />
         </form>
       </FormContainer>
-      <hr />
     </div>
   );
 };
