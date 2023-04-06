@@ -7,3 +7,11 @@ Content-Type: application/json
     "email": "saadqqq12@gmail.com",
     "password":"111222333"
     }
+
+###
+POST http://localhost:5000/api/v1/users/register
+Content-Type: application/json
+
+{
+    "f": 88
+}

@@ -6,13 +6,13 @@
     "react-toastify": "^9.1.2",
     "styled-components": "^5.3.9"
   },
-  "name": "chat-app",
+  "name": "E.Scaner",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "react-scripts start"
+    "start": "nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +27,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:5000"
+  }
 }
