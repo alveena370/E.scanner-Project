@@ -1,30 +1,39 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import styled, { createGlobalStyle } from "styled-components";
 
 const videoConstraints = {
-  width: 1280,
+  width: 640,
   height: 720,
   facingMode: "user",
 };
 
 const camera = () => {
-  const webcamRef = React.useRef(null);
-  const capture = React.useCallback(() => {
+  const webcamRef = useRef();
+  const [imgSrc, setImgSrc] = useState(null);
+  const capture = (e) => {
+    e.preventDefault();
     const imageSrc = webcamRef.current.getScreenshot();
-  }, [webcamRef]);
+    setImgSrc(imageSrc);
+    console.log(imageSrc);
+  };
   return (
     <>
       <Container>
         <Webcam
           audio={false}
-          height={720}
+          height={500}
           ref={webcamRef}
-          screenshotFormat="image/pdf"
-          width={1280}
+          screenshotFormat="image/jpeg"
+          width={640}
           videoConstraints={videoConstraints}
         />
-        <button onClick={capture}>Capture photo</button>
+        <form>
+          <button onClick={capture}>Capture photo</button>
+          <button onClick={capture}>Capture photo</button>
+          <input type="text" />
+        </form>
+        {imgSrc && <img src={imgSrc} />}
       </Container>
     </>
   );
