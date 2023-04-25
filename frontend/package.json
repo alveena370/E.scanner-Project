@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@material/image-list": "^14.0.0",
     "dwt": "^18.1.1",
     "ncp": "^2.0.0",
     "react": "^18.2.0",
