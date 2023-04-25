@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/login.jsx";
 import Homepage from "./pages/homepage.jsx";
-import Scanner from "./pages/camerajay.jsx";
+
 import Video from "./pages/video.jsx";
 import Chat from "./pages/chat.jsx";
 import Position from "./pages/position.jsx";

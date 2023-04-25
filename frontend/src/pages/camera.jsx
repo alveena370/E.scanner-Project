@@ -234,6 +234,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import styled, { createGlobalStyle } from "styled-components";
+import OverlayImage from "./Overlay.jsx";
+import { Container, Row, Col, Button } from "react-bootstrap";
+
 const videoConstraints = {
   width: 640,
   height: 640,
@@ -242,16 +245,16 @@ const videoConstraints = {
 const Camera = () => {
   const webcamRef = useRef(null);
   const [imageList, setImageList] = useState([]);
-  const [selectedPhoto, setSelectedPhoto] = useState();
-  useEffect(() => {
-    console.log(selectedPhoto);
-  }, [selectedPhoto]);
+  // const [selectedPhoto, setSelectedPhoto] = useState();
+  // useEffect(() => {
+  //   console.log(selectedPhoto);
+  // }, [selectedPhoto]);
 
   const capture = (e) => {
     e.preventDefault();
     const imageSrc = webcamRef.current.getScreenshot();
     setImageList([...imageList, imageSrc]);
-    console.log(imageList);
+    //console.log(imageList);
   };
   const uploadImage = (image) => {
     const formData = new FormData();
@@ -268,7 +271,7 @@ const Camera = () => {
           .then((res) => {
             console.log(res);
             if (res.success) {
-              setImageList(null);
+              setImageList([]);
               alert("upload done!");
             }
           })
@@ -282,70 +285,89 @@ const Camera = () => {
   };
   return (
     <Container>
-      <Webcam
-        audio={false}
-        height={480}
-        ref={webcamRef}
-        screenshotFormat="image/png"
-        width={480}
-        videoConstraints={videoConstraints}
-      />
-      <form onSubmit={capture}>
-        <button type="submit">Capture photo</button>
-        <button type="submit">Upload photo</button>
-      </form>
-      <div>
-        <ul>
-          {imageList &&
-            imageList.map((imageSrc, index) => (
-              <li key={index}>
-                <img
+      <Row>
+        <Col xl={4}>
+          <Webcam
+            audio={false}
+            height={480}
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            width={480}
+            videoConstraints={videoConstraints}
+          />
+        </Col>
+        <Col xl={4}>
+          <form onSubmit={capture}>
+            <button type="submit">Capture photo</button>
+            {/* <button type="submit">Upload photo</button> */}
+          </form>
+        </Col>
+        <Col xl={4}>
+          <Row>
+            {imageList &&
+              imageList.map((imageSrc, index) => (
+                <Col xl={3} key={index}>
+                  <OverlayImage
+                    src={imageSrc}
+                    alt="Overlay image"
+                    show={false}
+                    // onClick={(e) => (e.target.show = !e.target.show)}
+                    // target={/* the target element for the overlay */}
+                    placement="bottom"
+                    overlayText={
+                      <Button onClick={(e) => uploadImage(imageSrc)}>
+                        Upload
+                      </Button>
+                    }
+                  />
+                  {/* <img
                   onClick={(e) => uploadImage(imageSrc)}
                   src={imageSrc}
                   alt={`captured image ${index}`}
-                />
-              </li>
-            ))}
-        </ul>
-      </div>
+                /> */}
+                </Col>
+              ))}
+          </Row>
+        </Col>
+      </Row>
     </Container>
   );
 };
-const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  padding: 4rem;
-  justify-content: center;
-  gap: 1rem;
-  align-item: center;
-  background-color: #033e3e;
-  h1 {
-    color: white;
-    text-transform: uppercase;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-color: #00000076;
-    border-radius: 2rem;
-    padding: 3rem 5rem;
-    button {
-      background-color: #3cb371;
-      color: white;
-      padding: 1rem 2rem;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 0.4rem;
-      font-size: 1rem;
-      text-transform: uppercase;
-      transition: 0.5s ease-in-out;
-      &:hover {
-        background-color: #2e8b57;
-      }
-    }
-  }
-`;
+// const Container = styled.div`
+//   height: 100vh;
+//   width: 100vw;
+//   display: flex;
+//   padding: 4rem;
+//   justify-content: center;
+//   gap: 1rem;
+//   align-item: center;
+//   background-color: #033e3e;
+//   h1 {
+//     color: white;
+//     text-transform: uppercase;
+//   }
+//   form {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 2rem;
+//     background-color: #00000076;
+//     border-radius: 2rem;
+//     padding: 3rem 5rem;
+//     button {
+//       background-color: #3cb371;
+//       color: white;
+//       padding: 1rem 2rem;
+//       border: none;
+//       font-weight: bold;
+//       cursor: pointer;
+//       border-radius: 0.4rem;
+//       font-size: 1rem;
+//       text-transform: uppercase;
+//       transition: 0.5s ease-in-out;
+//       &:hover {
+//         background-color: #2e8b57;
+//       }
+//     }
+//   }
+// `;
 export default Camera;
