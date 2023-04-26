@@ -1,10 +1,8 @@
 import React, { useRef } from "react";
-import styled, { createGlobalStyle } from 'styled-components'
-import{Link}  from 'react-router-dom'
+import styled, { createGlobalStyle } from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
-
-
+const Login = ({ token, setToken, setUser }) => {
   const emailInput = useRef();
   const passwordInput = useRef();
 
@@ -15,6 +13,7 @@ const Login = () => {
       email: emailInput.current.value,
       password: passwordInput.current.value,
     };
+    console.log("loginData", loginData);
     const config = {
       method: "POST",
       headers: {
@@ -23,46 +22,54 @@ const Login = () => {
       body: JSON.stringify(loginData),
     };
 
-    fetch("http://localhost:5000/login", config)
+    fetch("/api/v1/users/login", config)
       .then((res) => {
-       
-     
         return res.json();
       })
       .then((result) => {
-          console.log(result);
-            if (!result.token) {
-            return;
-            }
-           localStorage.setItem("token", JSON.stringify(result.token));
-            setToken(result.token);
-           localStorage.setItem("user", JSON.stringify(result.user));
+        console.log(result);
+        if (!result.token) {
+          return;
+        }
+        localStorage.setItem("token", JSON.stringify(result.token));
+        setToken(result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
 
-            setUser(result.user)
+        setUser(result.user);
       })
       .catch((err) => {
-             console.log(err, "coming from catch");
+        console.log(err, "coming from catch");
       });
+  };
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    if (token) {
+      navigate("/");
+    } else {
+      alert("You need to login!!!!");
+    }
   };
 
   return (
     <div>
       <FormContainer>
-      
-      <form onSubmit={submitHandler}>
-      <h1>login please!!</h1>
-        <input type="email" placeholder="email" ref={emailInput} />
-        <input type="password" placeholder="password" ref={passwordInput} />
-        <br />
-        <button type="submit">Login</button>
-        <span><Link to="/register">Register</Link></span>
-      </form>
+        <form onSubmit={submitHandler}>
+          <h1>login please!!</h1>
+          <input type="email" placeholder="email" ref={emailInput} />
+          <input type="password" placeholder="password" ref={passwordInput} />
+          <br />
+          <button onClick={handleClick} type="submit">
+            Login{" "}
+          </button>
+          <span>
+            <Link to="/register">Register</Link>
+          </span>
+
+          <hr />
+        </form>
       </FormContainer>
-<hr />
-    
-
     </div>
-
   );
 };
 

@@ -3,6 +3,11 @@ import User from "../models/user.js";
 import createError from "http-errors";
 import { hash, compare } from "bcrypt";
 import jwt from "jsonwebtoken";
+import fs from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const userRouter = express.Router();
 userRouter
   .post("/register", async (req, res, next) => {
@@ -23,6 +28,11 @@ userRouter
       req.body.password = hashedPassword;
       const user = await User.create(req.body);
       delete user.password;
+
+      // create a new directory for the new user
+      if (!fs.existsSync(`${join(__dirname, `../data/users/${user.id}`)}`)) {
+        fs.mkdirSync(`${join(__dirname, `../data/users/${user.id}`)}`);
+      }
       return res.json({ status: true, user });
     } catch (error) {
       res.json(error.message);
@@ -30,16 +40,17 @@ userRouter
     }
   })
   .post("/login", async (req, res, next) => {
+    console.log("Test from login");
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        next(createError(401, "Failed"));
+        next(createError(401, "User not found !!!!!"));
         return;
       }
 
       const doneLogin = await compare(req.body.password, user.password);
       if (!doneLogin) {
-        next(createError(401, "Failed"));
+        next(createError(401, "Failed !!!!"));
         return;
       }
 

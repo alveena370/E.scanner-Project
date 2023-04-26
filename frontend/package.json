@@ -1,9 +1,16 @@
 {
   "dependencies": {
+    "@material/image-list": "^14.0.0",
+    "bootstrap": "^5.2.3",
+    "dwt": "^18.1.1",
+    "ncp": "^2.0.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.4",
     "react-router-dom": "^6.9.0",
+    "react-scanner": "^1.1.0",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.2",
+    "react-webcam": "^7.0.1",
     "styled-components": "^5.3.9"
   },
   "name": "chat-app",
@@ -11,8 +18,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "react-scripts start"
+    "start": "ncp node_modules/dwt/dist public/dwt-resources && react-scripts start",
+    "build": "react-scripts build && ncp node_modules/dwt/dist build/dwt-resources",
+    "test": "ncp node_modules/dwt/dist public/dwt-resources && react-scripts test",
+    "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
@@ -28,5 +37,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "quagga": "^0.12.1"
+  }
 }
