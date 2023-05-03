@@ -13,15 +13,17 @@
     "react-webcam": "^7.0.1",
     "styled-components": "^5.3.9"
   },
-  "name": "chat-app",
+  "name": "E.Scaner",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+
     "start": "ncp node_modules/dwt/dist public/dwt-resources && react-scripts start",
     "build": "react-scripts build && ncp node_modules/dwt/dist build/dwt-resources",
     "test": "ncp node_modules/dwt/dist public/dwt-resources && react-scripts test",
     "eject": "react-scripts eject"
+
   },
   "author": "",
   "license": "ISC",
@@ -36,9 +38,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
     "quagga": "^0.12.1"
+
   }
 }
