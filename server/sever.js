@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connect from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import createError from "http-errors";
+import Camera from "./routes/cameraRouter.js";
 const App = express();
 
 dotenv.config();
@@ -13,7 +14,7 @@ App.use(express.json());
 App.use(express.urlencoded({ extended: false }));
 
 App.use("/api/v1/users", userRouter);
-
+App.use("/camera", Camera);
 App.use((req, res, next) => {
   next(createError(404, "PAGE NOT FOUND !!!"));
 });
